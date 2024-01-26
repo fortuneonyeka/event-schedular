@@ -20,7 +20,12 @@ const BasicCalendar = () => {
   return (
     <Calendar
       events={events}
-      
+      defaultView={"week"}
+      views={["month", "week", "day"]}
+      date={moment("2024-01-26").toDate()}
+      // toolbar={false}
+      max={moment("2024-01-26T19:00:00").toDate()}
+      min={moment("2024-01-26T06:00:00")}
     />
   );
 };
