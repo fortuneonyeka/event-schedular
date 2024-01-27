@@ -1,11 +1,11 @@
 import React from 'react';
 import './modal.css';
 
-const Modal = ({ saveEvent, eventTitle, setEventTitle, setShowModal }) => {
+const Modal = ({ saveEvent, eventTitle, setEventTitle, setShowModal, selectEvent }) => {
   return (
     <div className="modal-container">
       <div className="modal-content">
-        <h2>Add Event</h2>
+        <h2>{selectEvent ? "Edit Event" : "Add Event"}</h2>
         <form>
           <div className="form-group">
             <label htmlFor="eventTitle">Event Title:</label>
@@ -19,7 +19,7 @@ const Modal = ({ saveEvent, eventTitle, setEventTitle, setShowModal }) => {
           </div>
           <div className="form-group">
             <button onClick={saveEvent} type="button" className="submit-btn">
-              Submit
+            {selectEvent ? "Add Changes" : "Add Event"}
             </button>
             <button onClick={setShowModal} className="cancel-btn">
               Cancel

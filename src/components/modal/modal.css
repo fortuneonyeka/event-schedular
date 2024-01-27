@@ -17,7 +17,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  width: 300px;
+  width: 500px;
 }
 
 .modal-content h2 {
@@ -37,8 +37,10 @@ label {
 input[type="text"] {
   width: 100%;
   padding: 8px;
+  padding-top: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 17px;
 }
 
 .submit-btn,
