@@ -8,8 +8,7 @@
 
 .rbc-header {
       background: greenyellow;
-      color: black;
-      padding-top: 28px;
+      padding-bottom: 18px;
       font-weight: bold;
     }
     
@@ -32,13 +31,13 @@
             display: none;
       }
 
-      .rbc-header {
+      /* .rbc-header {
             padding-top: 70px;
             background: white;
             color: black;
             font-size: 50px;
            
-      }
+      } */
       .rbc-time-view {
             width: 100vw !important;
       }
@@ -113,3 +112,4 @@
 
       }
     }
+
