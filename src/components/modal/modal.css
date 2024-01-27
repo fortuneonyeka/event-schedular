@@ -44,9 +44,11 @@ input[type="text"] {
 }
 
 .submit-btn,
+.delete-btn,
 .cancel-btn {
   padding: 8px 15px;
   border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   cursor: pointer;
 }
@@ -55,9 +57,40 @@ input[type="text"] {
   background-color: #4caf50;
   color: #fff;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .cancel-btn {
   background-color: #ccc;
   color: #000;
+}
+
+.cancel-btn:hover {
+  background-color: rgb(255, 77, 0);
+}
+
+.delete-btn {
+  position: relative;
+  background-color: #ccc;
+  color: black;
+}
+
+.delete-btn::after {
+  content: 'Are you sure?';
+  position: absolute;
+  top: -20px;
+  left: 20%;
+  transform: translateX(-50%);
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.delete-btn:hover::after {
+  opacity: 1;
 }

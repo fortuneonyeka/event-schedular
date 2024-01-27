@@ -1,7 +1,7 @@
 import React from 'react';
 import './modal.css';
 
-const Modal = ({ saveEvent, eventTitle, setEventTitle, setShowModal, selectEvent }) => {
+const Modal = ({ saveEvent, eventTitle, setEventTitle, setShowModal, selectEvent, deleteEvents }) => {
   return (
     <div className="modal-container">
       <div className="modal-content">
@@ -18,6 +18,15 @@ const Modal = ({ saveEvent, eventTitle, setEventTitle, setShowModal, selectEvent
             />
           </div>
           <div className="form-group">
+            {selectEvent && (
+              <button type='button'
+              onClick={deleteEvents}
+              className='delete-btn'
+              
+              >
+                Remove Event
+              </button>
+            )}
             <button onClick={saveEvent} type="button" className="submit-btn">
             {selectEvent ? "Add Changes" : "Add Event"}
             </button>

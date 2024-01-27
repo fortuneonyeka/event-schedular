@@ -59,6 +59,16 @@ const BasicCalendar = () => {
     }
   };
 
+  const deleteEvents = () => {
+    if (selectEvent) {
+      const updateEvents = events.filter((event) => event !== selectEvent);
+      setEvents(updateEvents);
+      setShowModal(false);
+      setEventTitle("");
+      setSelectEvent(null);
+    }
+  };
+
   return (
     <div style={{ height: "800px" }}>
       <Calendar
@@ -82,6 +92,7 @@ const BasicCalendar = () => {
             setEventTitle("");
             setSelectEvent(null);
           }}
+          deleteEvents={deleteEvents}
           selectEvent={selectEvent}
         />
       )}
