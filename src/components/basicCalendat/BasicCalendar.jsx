@@ -1,66 +1,53 @@
-import React from "react";
-import moment from "moment";
-import Calendar from "../Calendar";
-import { Views } from "react-big-calendar";
-import { useMemo } from "react";
+import React , {useState} from "react";
+
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
 import "./basic.css"
+import Modal from "../modal/Modal";
+
+const localizer = momentLocalizer(moment);
 
 
-const events = [
-  {
-    start: moment("2024-01-26T13:00:00").toDate(),
-    end: moment("2024-01-26T16:00:00").toDate(),
-    title: "Take Home",
-    data:{
-      type: "Visit"
-    }
-  },
-  {
-    start: moment("2024-01-24T16:00:00").toDate(),
-    end: moment("2024-01-24T16:30:00").toDate(),
-    title: "Meeting ",
-    data:{
-      type: "Appointment"
-    }
-  },
-];
+const BasicCalendar = () => { 
+      const [events, setEvents] = useState([])
+      const [showModal, setShowModal] = useState(false)
+      const [selectedDate, setSelectedDate] = useState(null)
+      const [eventTitle, setEventTitle] = useState("")
 
-const components = {
-      event: (props) => {
-           const  evenType = props?.event?.data?.type;
-           switch (evenType) {
-            case "Appointment":
-                  return (
-                        <div style={{color:"gold", height:"100%"}}>{props.title}
-                        </div>
-                  );
-                  
-            case "Visit":
-                  return (
-                        <div style={{ color:"white", height:"100%"}}>{props.title}</div>
-                  )
-            default:
-                  break;
-           }
-            return null
+
+      const handleSelectSlot = (slotInfo) => {
+            setShowModal(true);
+            setSelectedDate(slotInfo.start);
       }
-}
 
-const BasicCalendar = () => {
+      const saveEvent = () => {
+            if (eventTitle && selectedDate) {
+                 const newEvent = {
+                  title: eventTitle,
+                  start: selectedDate,
+                  end: moment(selectedDate).add(1, "hours").toDate(),
+                 };
+                 setEvents([...events, newEvent]);
+                 setShowModal(false);
+                 setEventTitle("");
+            }
+      }
 
-     
   return (
-    <Calendar
+<div style={{height: "800px"}}>
+<Calendar
+      localizer={localizer}
       events={events}
-      defaultView={"week"}
-      views={["month", "week", "day"]}
-      
-      date={moment("2024-01-26").toDate()}
-      // toolbar={false}
-      max={moment("2024-01-26T19:00:00").toDate()}
-      min={moment("2024-01-26T06:00:00")}
-      components={components}
+      startAccessor="start"
+      endAccessor="end"
+      style={{ margin: "50px" }}
+      selectable={true}
+      onSelectSlot={handleSelectSlot}
     />
+    {showModal && (
+      <Modal saveEvent={saveEvent} eventTitle={eventTitle} setEventTitle={(e) => setEventTitle(e.target.value)} setShowModal={() => setShowModal(false)}/>
+    )}
+</div>
   );
 };
 
