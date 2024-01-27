@@ -4,12 +4,11 @@
   color: #fff;
   padding: 20px;
   z-index: 2;
-  position: fixed; /* Make sidebar fixed */
-  left: 0; /* Align sidebar to the left */
-  top: 0; /* Align sidebar to the top */
-  height: 100vh; /* Make sidebar full height */
-  overflow-y: auto; /* Add scrollbar if content exceeds sidebar height */
-  
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .sidenav h2 {
@@ -31,50 +30,45 @@
 }
 
 .sidenav a:hover {
-  color: #ff0; /* Change color on hover as needed */
+  color: #ff0;
 }
-
-
-
 
 /* Media Queries */
 @media screen and (max-width: 768px) {
-      .sidenav {
-        width: 100%; /* Adjust width for tablets */
-      }
-    }
-    
-    @media screen and (max-width: 576px) {
-      .sidenav {
-        width: 100%; /* Adjust width for mobile devices */
-        height: 5%;
-        padding-right: 100%; /* Adjust padding for mobile devices */
-      }
+  .sidenav {
+    width: 100%;
+  }
+}
 
-      .content {
-            flex: 1;
-            margin-left: 0;
-            padding-top: 100px;
-      }
-    
-      .sidenav h2 {
-        font-size: 16px; /* Adjust font size for mobile devices */
-      }
-    
-      .sidenav li {
-        margin-bottom: 8px; /* Adjust margin for list items on mobile */
-      }
+@media screen and (max-width: 576px) {
+  .sidenav {
+    width: 100%;
+    height: 5%;
+    padding-right: 100%;
+  }
 
-      .nevItems {
-            display: flex;
-            flex-direction: row;
-            gap: 40px;
-            justify-content: space-between;
-            
-      }
+  .content {
+    flex: 1;
+    margin-left: 0;
+    padding-top: 100px;
+  }
 
-      .rbc-allday-cell {
-            display: none !important;
-      }
+  .sidenav h2 {
+    font-size: 16px;
+  }
 
+  .sidenav li {
+    margin-bottom: 8px;
+  }
+
+  .nevItems {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: space-between;
+  }
+
+  .rbc-allday-cell {
+    display: none !important;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "./basic.css";
@@ -14,6 +14,16 @@ const BasicCalendar = () => {
   const [selectEvent, setSelectEvent] = useState(null);
 
   const today = moment().startOf("day");
+
+  const storedEvents = JSON.parse(localStorage.getItem("events")) || [];
+
+
+
+  useEffect(() => {
+    if (storedEvents.length > 0) {
+      setEvents(storedEvents);
+    }
+  }, []);
 
   const handleSelectSlot = (slotInfo) => {
     if (moment(slotInfo.start).isSameOrAfter(today, "day")) {
@@ -36,22 +46,22 @@ const BasicCalendar = () => {
       const selected = moment(selectedDate).startOf("day");
 
       if (selected.isSameOrAfter(today)) {
-        if (selectEvent) {
-          const updatedEvent = { ...selectEvent, title: eventTitle };
-          const updatedEvents = events.map((event) =>
-            event === selectEvent ? updatedEvent : event
-          );
-          setEvents(updatedEvents);
-        } else {
-          const newEvent = {
-            title: eventTitle,
-            start: selectedDate,
-            end: moment(selectedDate).add(1, "hours").toDate(),
-          };
-          setEvents([...events, newEvent]);
-        }
+        const newEvent = {
+          id: events.length + 1,
+          title: eventTitle,
+          start: selectedDate,
+          end: moment(selectedDate).add(4, "hours").toDate(),
+        };
+
+        storedEvents.push(newEvent);
+
+        localStorage.setItem("events", JSON.stringify(storedEvents));
+
+        setEvents((prev) => [...prev, newEvent]);
+
         setShowModal(false);
         setEventTitle("");
+        setSelectedDate(null);
         setSelectEvent(null);
       } else {
         alert("You can only add events for today and future dates.");
@@ -59,15 +69,46 @@ const BasicCalendar = () => {
     }
   };
 
-  const deleteEvents = () => {
+  const handleEdit = () => {
+      const updatedEvent = { ...selectEvent, title: eventTitle };
+      
+      const updatedEvents = storedEvents.map((event) =>
+        event.id === selectEvent.id ? updatedEvent : event
+      );
+      localStorage.setItem("events", JSON.stringify(updatedEvents));
+      setEvents(updatedEvents);
+      setShowModal(false);
+      setEventTitle("");
+      setSelectEvent(null);
+  }
+
+  const deleteEvents = (id) => {
     if (selectEvent) {
-      const updateEvents = events.filter((event) => event !== selectEvent);
-      setEvents(updateEvents);
+      const filteredEvents = storedEvents.filter((event) => event.id !== id);
+
+      localStorage.setItem("events", JSON.stringify(filteredEvents));
+      setEvents(filteredEvents);
+
       setShowModal(false);
       setEventTitle("");
       setSelectEvent(null);
     }
   };
+
+  const eventStyleGetter = (event, start, end, isSelected) => {
+      const eventDate = moment(event.start).startOf("day");
+      const currentDate = moment(selectedDate).startOf("day");
+  
+      if (eventDate.isSame(currentDate)) {
+        return {
+          style: {
+            backgroundColor: "red",
+          },
+        };
+      }
+  
+      return {};
+    };
 
   return (
     <div style={{ height: "800px" }}>
@@ -80,8 +121,11 @@ const BasicCalendar = () => {
         selectable={true}
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectedEvent}
-        min={today.toDate()} // Set minimum date to today
+        eventPropGetter={eventStyleGetter}
+        min={today.toDate()}
       />
+
+      
       {showModal && (
         <Modal
           saveEvent={saveEvent}
@@ -92,6 +136,7 @@ const BasicCalendar = () => {
             setEventTitle("");
             setSelectEvent(null);
           }}
+          handleEdit={handleEdit}
           deleteEvents={deleteEvents}
           selectEvent={selectEvent}
         />
