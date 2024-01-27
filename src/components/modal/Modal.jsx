@@ -6,7 +6,7 @@ const Modal = ({ saveEvent, eventTitle, setEventTitle, setShowModal }) => {
     <div className="modal-container">
       <div className="modal-content">
         <h2>Add Event</h2>
-        <form onSubmit={saveEvent}>
+        <form>
           <div className="form-group">
             <label htmlFor="eventTitle">Event Title:</label>
             <input
@@ -18,7 +18,7 @@ const Modal = ({ saveEvent, eventTitle, setEventTitle, setShowModal }) => {
             />
           </div>
           <div className="form-group">
-            <button type="submit" className="submit-btn">
+            <button onClick={saveEvent} type="button" className="submit-btn">
               Submit
             </button>
             <button onClick={setShowModal} className="cancel-btn">
