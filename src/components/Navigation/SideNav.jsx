@@ -1,18 +1,38 @@
-import React from 'react'
-import "./sidenav.css"
+import React from 'react';
+import "./sidenav.css";
 
 const SideNav = () => {
+  const navItems =  [
+    {
+      navItem: "Dashboard",
+      id: 1,
+      url: "/"
+    },
+    {
+      navItem: "Calendar",
+      id: 2, // Updated ID for Calendar
+      url: "/calendar"
+    },
+    {
+      navItem: "Events",
+      id: 3, // Updated ID for Events
+      url: "/events"
+    }
+  ];
+
   return (
     <div>
       <div className='sidenav'>
-        <ul className='nevItems'>
-          <li><a href="#dashboard">Dashboard</a></li>
-          <li><a href="#calendar">Calendar</a></li>
-          <li><a href="#events">Events</a></li>
+        <ul className='navItems'>
+          {navItems.map((item) => (
+            <li key={item.id} className={window.location.pathname === item.url ? 'active' : ''}>
+              <a href={item.url}>{item.navItem}</a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SideNav
+export default SideNav;

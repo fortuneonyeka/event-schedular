@@ -1,0 +1,61 @@
+.dashboard {
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    
+    .dashboard h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+    
+    .stat-card {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      flex: 1;
+      margin-right: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stat-card:last-child {
+      margin-right: 0;
+    }
+    
+    .stat-card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    .stat-card p {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .recent-activity {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .recent-activity h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .recent-activity ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .recent-activity li {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    

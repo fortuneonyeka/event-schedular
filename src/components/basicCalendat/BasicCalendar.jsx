@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
+import React, { useState, useEffect, useMemo } from "react";
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
 import "./basic.css";
 import Modal from "../modal/Modal";
 
@@ -15,7 +15,7 @@ const BasicCalendar = () => {
 
   const today = moment().startOf("day");
 
-  const storedEvents = JSON.parse(localStorage.getItem("events")) || [];
+  const storedEvents = useMemo(() => JSON.parse(localStorage.getItem("events")) || [], []);
 
 
 
@@ -23,7 +23,7 @@ const BasicCalendar = () => {
     if (storedEvents.length > 0) {
       setEvents(storedEvents);
     }
-  }, []);
+  }, [storedEvents]);
 
   const handleSelectSlot = (slotInfo) => {
     if (moment(slotInfo.start).isSameOrAfter(today, "day")) {
@@ -70,17 +70,20 @@ const BasicCalendar = () => {
   };
 
   const handleEdit = () => {
-      const updatedEvent = { ...selectEvent, title: eventTitle };
-      
-      const updatedEvents = storedEvents.map((event) =>
-        event.id === selectEvent.id ? updatedEvent : event
-      );
-      localStorage.setItem("events", JSON.stringify(updatedEvents));
-      setEvents(updatedEvents);
-      setShowModal(false);
-      setEventTitle("");
-      setSelectEvent(null);
-  }
+      if (selectEvent) {
+          const updatedEvent = { ...selectEvent, title: eventTitle };
+  
+          const updatedEvents = events.map((event) =>
+              event.id === selectEvent.id ? updatedEvent : event
+          );
+  
+          localStorage.setItem("events", JSON.stringify(updatedEvents));
+          setEvents(updatedEvents);
+          setShowModal(false);
+          setEventTitle("");
+          setSelectEvent(null);
+      }
+  };
 
   const deleteEvents = (id) => {
     if (selectEvent) {
