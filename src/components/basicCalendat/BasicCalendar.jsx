@@ -17,13 +17,40 @@ const BasicCalendar = () => {
 
   const storedEvents = useMemo(() => JSON.parse(localStorage.getItem("events")) || [], []);
 
+  // // const storedEvents = JSON.parse(localStorage.getItem("events")) || [];
+
+  // useEffect(() => {
+  //   if (storedEvents.length > 0) {
+  //     setEvents(storedEvents);
+  //   }
+  // }, [storedEvents]);
 
 
+  // const storedEvents = useMemo(() => {
+  //   // Filter out past events before setting events state
+  //   const filteredEvents = JSON.parse(localStorage.getItem("events") || "[]").filter(
+  //     event => moment(event.start).startOf('day').isSameOrAfter(today)
+  //   );
+  //   return filteredEvents;
+  // }, [today]);
+
+
+
+  // Get stored events from local storage
+  // const storedEvents = JSON.parse(localStorage.getItem("events") || "[]");
   useEffect(() => {
-    if (storedEvents.length > 0) {
-      setEvents(storedEvents);
-    }
-  }, [storedEvents]);
+    
+    // Filter out past events
+    const filteredEvents = storedEvents.filter(
+      event => moment(event.start).startOf('day').isSameOrAfter(today)
+    );
+
+    // Update local storage with filtered events
+    localStorage.setItem("events", JSON.stringify(filteredEvents));
+
+    // Update events state
+    setEvents(filteredEvents);
+  }, [storedEvents, today]);
 
   const handleSelectSlot = (slotInfo) => {
     if (moment(slotInfo.start).isSameOrAfter(today, "day")) {
@@ -50,7 +77,8 @@ const BasicCalendar = () => {
           id: events.length + 1,
           title: eventTitle,
           start: selectedDate,
-          end: moment(selectedDate).add(4, "hours").toDate(),
+          end: moment(selectedDate).endOf("day").toDate(),
+          allDay: true, 
         };
 
         storedEvents.push(newEvent);
@@ -98,20 +126,6 @@ const BasicCalendar = () => {
     }
   };
 
-  const eventStyleGetter = (event, start, end, isSelected) => {
-      const eventDate = moment(event.start).startOf("day");
-      const currentDate = moment(selectedDate).startOf("day");
-  
-      if (eventDate.isSame(currentDate)) {
-        return {
-          style: {
-            backgroundColor: "red",
-          },
-        };
-      }
-  
-      return {};
-    };
 
   return (
     <div style={{ height: "800px" }}>
@@ -119,12 +133,12 @@ const BasicCalendar = () => {
         localizer={localizer}
         events={events}
         startAccessor="start"
-        endAccessor="end"
+      endAccessor="end"
         style={{ margin: "50px" }}
         selectable={true}
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectedEvent}
-        eventPropGetter={eventStyleGetter}
+        // eventPropGetter={eventStyleGetter}
         min={today.toDate()}
       />
 
