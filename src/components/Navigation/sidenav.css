@@ -1,93 +1,125 @@
-/* Default styles */
-.sidenav {
-  width: 250px;
-  height: 100%;
+/* Navbar styles */
+.navbar {
+  background-color: #333;
+  color: #fff;
+  width: 250px; /* Adjust width for tablet and desktop */
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #333;
-  padding-top: 20px;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  z-index: 1000;
 }
 
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #555;
+}
 
-
-.navItems {
-  list-style-type: none;
+.nav-items {
+  list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.navItems li {
-  padding: 10px;
+.nav-items li {
+  padding: 15px;
   border-bottom: 1px solid #555;
 }
 
-.navItems li a {
+
+
+
+
+.nav-items li a {
+  text-decoration: none;
+  color: white; /* Default color for nav items */
+  transition: color 0.3s; /* Smooth transition effect */
+}
+
+.nav-items li a:hover {
+  color: gray; /* Change color to red on hover */
+}
+
+.nav-items li.active {
+  border-left: 5px solid #ffcc00; /* Yellow border-left for active item */
+}
+
+
+
+
+
+.nav-items li:last-child {
+  border-bottom: none;
+}
+
+.nav-items a {
   color: #fff;
   text-decoration: none;
-  font-size: 16px;
-  display: block;
-  padding: 10px;
-  transition: 0.3s;
 }
 
-.navItems li a:hover {
-  background-color: #555;
+/* Hamburger styles */
+.hamburger {
+  display: none; /* Hide hamburger icon by default */
+  cursor: pointer;
 }
 
-.navItems li.active a {
-  background-color: #555;
-  border-left: 5px solid #ffcc00;
+.line {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px 0;
+  transition: all 0.3s ease;
 }
 
-.sidenav h2 {
-  color: #fff;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Media queries */
-@media screen and (max-width: 768px) {
-  .sidenav {
-    width: 200px; /* Adjust width for tablets */
-    padding-top: 10px; /* Adjust padding for tablets */
+/* Tablet and mobile view */
+@media screen and (max-width: 992px) {
+  .navbar {
+    width: 100%; /* Adjust width for tablet */
+    height: 100px;
   }
 
-  .navItems li {
-    padding: 8px; /* Adjust padding for tablets */
+  .nav-header h3 {
+    display: none;
   }
 
-  .navItems li a {
-    font-size: 14px; /* Adjust font size for tablets */
+  .nav-items {
+    display: none;
   }
 
-  .sidenav h2 {
-    font-size: 18px; /* Adjust font size for tablets */
-    margin-bottom: 10px; /* Adjust margin for tablets */
-  }
-}
-
-@media screen and (max-width: 576px) {
-
-  .container {
-    
-  }
-  .sidenav {
-    width: 100%; /* Full width for mobile screens */
-    height: auto; /* Auto height for mobile screens */
-    padding-top: 10px; /* Adjust padding for mobile screens */
+  .hamburger {
+    display: block;
   }
 
-  .navItems li {
-    padding: 8px; /* Adjust padding for mobile screens */
+  .open .line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
   }
 
-  .navItems li a {
-    font-size: 14px; /* Adjust font size for mobile screens */
+  .open .line:nth-child(2) {
+    opacity: 0;
   }
 
-  .sidenav h2 {
-    font-size: 18px; /* Adjust font size for mobile screens */
-    margin-bottom: 10px; /* Adjust margin for mobile screens */
+  .open .line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
+
+  .open .nav-items {
+    display: flex;
+    /* flex-direction: ; */
+    gap: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .nav-items li {
+    padding: 1px;
+    /* border-bottom: 1px solid #555; */
+  }
+
+  /* Add yellow line to active nav item */
+  
 }
