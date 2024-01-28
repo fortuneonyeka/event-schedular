@@ -1,0 +1,27 @@
+.event-container {
+      margin: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      /* grid-column: span; */
+      gap: 20px; 
+    }
+    
+    .event-item {
+      padding: 20px;
+      border: 1px solid #ddd;
+      background-color: #f9f9f9;
+    }
+    
+    /* Media queries */
+    @media screen and (max-width: 576px) {
+      .event-item {
+        padding: 12px; /* Adjust padding for mobile screens */
+      }
+    }
+    
+    @media screen and (min-width: 577px) and (max-width: 768px) {
+      .event-item {
+        padding: 15px; /* Adjust padding for tablet screens */
+      }
+    }
+    

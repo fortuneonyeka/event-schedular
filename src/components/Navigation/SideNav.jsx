@@ -22,7 +22,7 @@ const SideNav = () => {
   ];
 
   return (
-    <div>
+    <div className='container'>
       <div className='sidenav'>
         <ul className='navItems'>
           {navItems.map((item) => (

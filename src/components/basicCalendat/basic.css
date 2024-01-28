@@ -113,3 +113,41 @@
       }
     }
 
+
+
+
+
+
+    .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.event-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.event-item h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.event-item p {
+  font-size: 14px;
+  margin: 0;
+}

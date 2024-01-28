@@ -1,24 +1,27 @@
-import React from 'react';
-import './dashboard.css';
+import React, { useEffect, useState } from "react";
+import "./dashboard.css";
 
 const Dashboard = () => {
+  const [storedEvents, setStoredEvents] = useState([]);
+  const [numberOfStoredEvents, setNumberOfStoredEvents] = useState(0);
   const statsData = [
-    { title: 'Total Users', value: '1000' },
-    { title: 'Total Events', value: '500' },
-    { title: 'Total Revenue', value: '$5000' }
+    { title: "Total Users", value: "1000" },
+    { title: "Total Events", value: numberOfStoredEvents },
+    { title: "Total Revenue", value: "$5000" },
   ];
 
-
-  const recentActivityData = [
-    'User John Doe registered.',
-    'Order #123 shipped.',
-    'User Jane Smith logged in.',
-    'New product added.'
-  ];
+  useEffect(() => {
+    const eventsFromLocalStorage =
+      JSON.parse(localStorage.getItem("events")) || [];
+    setStoredEvents(eventsFromLocalStorage);
+    setNumberOfStoredEvents(eventsFromLocalStorage.length);
+  }, []);
 
   return (
-    <div className="dashboard">
-      <h1>Welcome to the Dashboard</h1>
+    <div >
+      <div>
+        <h1 className="dashboard-header">Welcome to the Dashboard</h1>
+      </div>
       <div className="stats">
         {statsData.map((stat, index) => (
           <div key={index} className="stat-card">
@@ -27,13 +30,25 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
+
+      <div>
+        <h2 className="dashboard-header">Scheduled Events</h2>
+        <div className="event-grid">
+          {storedEvents.map((event, index) => (
+            <div key={index} className="event-item">
+              <h3>{event.title}</h3>
+              <p>{event.description}</p>
+              <p>
+                {event.start} - {event.end}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="recent-activity">
         <h2>Recent Activity</h2>
-        <ul>
-          {recentActivityData.map((activity, index) => (
-            <li key={index}>{activity}</li>
-          ))}
-        </ul>
+        <h2>You scheduled: {numberOfStoredEvents} events</h2>
       </div>
     </div>
   );

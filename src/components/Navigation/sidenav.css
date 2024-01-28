@@ -1,4 +1,4 @@
-
+/* Default styles */
 .sidenav {
   width: 250px;
   height: 100%;
@@ -8,6 +8,8 @@
   background-color: #333;
   padding-top: 20px;
 }
+
+
 
 .navItems {
   list-style-type: none;
@@ -42,4 +44,50 @@
   color: #fff;
   text-align: center;
   margin-bottom: 20px;
+}
+
+/* Media queries */
+@media screen and (max-width: 768px) {
+  .sidenav {
+    width: 200px; /* Adjust width for tablets */
+    padding-top: 10px; /* Adjust padding for tablets */
+  }
+
+  .navItems li {
+    padding: 8px; /* Adjust padding for tablets */
+  }
+
+  .navItems li a {
+    font-size: 14px; /* Adjust font size for tablets */
+  }
+
+  .sidenav h2 {
+    font-size: 18px; /* Adjust font size for tablets */
+    margin-bottom: 10px; /* Adjust margin for tablets */
+  }
+}
+
+@media screen and (max-width: 576px) {
+
+  .container {
+    
+  }
+  .sidenav {
+    width: 100%; /* Full width for mobile screens */
+    height: auto; /* Auto height for mobile screens */
+    padding-top: 10px; /* Adjust padding for mobile screens */
+  }
+
+  .navItems li {
+    padding: 8px; /* Adjust padding for mobile screens */
+  }
+
+  .navItems li a {
+    font-size: 14px; /* Adjust font size for mobile screens */
+  }
+
+  .sidenav h2 {
+    font-size: 18px; /* Adjust font size for mobile screens */
+    margin-bottom: 10px; /* Adjust margin for mobile screens */
+  }
 }

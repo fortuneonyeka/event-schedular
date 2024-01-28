@@ -159,6 +159,7 @@ const BasicCalendar = () => {
       <Calendar
         localizer={localizer}
         events={events}
+        views={["month",  "agenda"]}
         startAccessor="start"
         endAccessor="end"
         style={{ margin: "50px" }}
@@ -169,7 +170,6 @@ const BasicCalendar = () => {
         min={today.toDate()}
       />
 
-      <Events events={events} storedEvents={storedEvents} />
       {/* <Entes storedEvents={storedEvents}/> */}
 
       {showModal && (
