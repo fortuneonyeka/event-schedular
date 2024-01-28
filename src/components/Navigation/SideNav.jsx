@@ -17,7 +17,8 @@ const SideNav = () => {
       navItem: "Events",
       id: 3, // Updated ID for Events
       url: "/events"
-    }
+    },
+    
   ];
 
   return (

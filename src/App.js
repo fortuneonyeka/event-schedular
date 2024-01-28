@@ -8,8 +8,7 @@ import {
   ScrollRestoration,
 } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-import { Calendar } from "react-big-calendar";
-import Events from "./pages/Events";
+import Events from "./components/Events";
 
 const Layout = () => {
   return (
@@ -40,6 +39,7 @@ const router = createBrowserRouter([
         path:"/events",
         element: <Events />
       },
+     
       
     ]
   }
