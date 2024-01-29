@@ -4,17 +4,30 @@ import "./dashboard.css";
 const Dashboard = () => {
   const [storedEvents, setStoredEvents] = useState([]);
   const [numberOfStoredEvents, setNumberOfStoredEvents] = useState(0);
-  const statsData = [
-    { title: "Total Users", value: "1000" },
-    { title: "Total Events", value: numberOfStoredEvents },
-    { title: "Total Revenue", value: "$5000" },
-  ];
+  const [numberOfPassedEvents, setNumberOfPassedEvents] = useState(0);
 
   useEffect(() => {
     const eventsFromLocalStorage =
       JSON.parse(localStorage.getItem("events")) || [];
     setStoredEvents(eventsFromLocalStorage);
     setNumberOfStoredEvents(eventsFromLocalStorage.length);
+
+    // Filter out passed events excluding today
+    const passedEvents = eventsFromLocalStorage.filter((event) => {
+      const eventStart = new Date(event.start);
+      const today = new Date();
+      const todayStart = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate(),
+        0,
+        0,
+        0,
+        0
+      );
+      return eventStart < todayStart;
+    });
+    setNumberOfPassedEvents(passedEvents.length);
   }, []);
 
   return (
@@ -23,12 +36,18 @@ const Dashboard = () => {
         <h1 className="dashboard-header">Welcome to the Dashboard</h1>
       </div>
       <div className="stats">
-        {statsData.map((stat, index) => (
-          <div key={index} className="stat-card">
-            <h2 className="stat-title">{stat.title}</h2>
-            <p className="stat-value">{stat.value}</p>
-          </div>
-        ))}
+        <div className="stat-card">
+          <h2 className="stat-title">Total Users</h2>
+          <p className="stat-value">1000</p>
+        </div>
+        <div className="stat-card">
+          <h2 className="stat-title">Total Events</h2>
+          <p className="stat-value">{numberOfStoredEvents}</p>
+        </div>
+        <div className="stat-card">
+          <h2 className="stat-title">Total Revenue</h2>
+          <p className="stat-value">$5000</p>
+        </div>
       </div>
 
       <div>
@@ -49,6 +68,7 @@ const Dashboard = () => {
       <div className="recent-activity">
         <h2>Recent Activity</h2>
         <h2>You scheduled: {numberOfStoredEvents} events</h2>
+        <p>Number of passed events: {numberOfPassedEvents}</p>
       </div>
     </div>
   );
