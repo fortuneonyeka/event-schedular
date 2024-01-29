@@ -106,6 +106,21 @@ const BasicCalendar = () => {
     }
   };
 
+  // Add line-through style to passed events
+  const eventStyleGetter = (event, start, end, isSelected) => {
+    const eventStart = moment(event.start).startOf("day");
+
+    if (eventStart.isBefore(today, "day")) {
+      return {
+        style: {
+          textDecoration: "line-through",
+        },
+      };
+    }
+
+    return {};
+  };
+
 
   return (
     <div style={{ height: "800px" }}>
@@ -116,6 +131,7 @@ const BasicCalendar = () => {
         startAccessor="start"
         endAccessor="end"
         style={{ margin: "50px" }}
+        eventPropGetter={eventStyleGetter}
         selectable={true}
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectedEvent}
