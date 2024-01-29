@@ -21,7 +21,7 @@ const BasicCalendar = () => {
     []
   );
 
-  // const storedEvents = JSON.parse(localStorage.getItem("events")) || [];
+  
 
   useEffect(() => {
     if (storedEvents.length > 0) {
@@ -29,54 +29,8 @@ const BasicCalendar = () => {
     }
   }, [storedEvents]);
 
-  // const storedEvents = useMemo(() => {
-  //   // Filter out past events before setting events state
-  //   const filteredEvents = JSON.parse(localStorage.getItem("events") || "[]").filter(
-  //     event => moment(event.start).startOf('day').isSameOrAfter(today)
-  //   );
-  //   return filteredEvents;
-  // }, [today]);
-
-  // Get stored events from local storage
-  // const storedEvents = JSON.parse(localStorage.getItem("events") || "[]");
-  // useEffect(() => {
-
-  //   // Filter out past events
-  //   const filteredEvents = storedEvents.filter(
-  //     event => moment(event.start).startOf('day').isSameOrAfter(today)
-  //   );
-
-  //   // Update local storage with filtered events
-  //   localStorage.setItem("events", JSON.stringify(filteredEvents));
-
-  //   // Update events state
-  //   setEvents(filteredEvents);
-  // }, [storedEvents, today]);
-
-  // const filteredEvents = storedEvents.filter(
-  //   event => moment(event.start).startOf('day').isSameOrAfter(today)
-  // );
-
-  // // Update local storage with filtered events
-  // localStorage.setItem("events", JSON.stringify(filteredEvents));
-
-  // // Update events state
-  // setEvents(filteredEvents);
-
-  // const getEventsByDay = () => {
-  //   const newEvents = storedEvents.filter((event) =>
-  //     moment(event.start).startOf("week").isSameOrAfter(today)
-  //   );
-
-  //   console.log(newEvents, 'new events');
-  //   setEvents(newEvents);
-  // };
-
-  // useEffect(() => {
-  //   getEventsByDay();
-  // }, []);
-
-  console.log({storedEvents})
+  
+  
 
   const handleSelectSlot = (slotInfo) => {
     if (moment(slotInfo.start).isSameOrAfter(today, "day")) {
@@ -152,7 +106,6 @@ const BasicCalendar = () => {
     }
   };
 
-  // console.log({ events, storedEvents });
 
   return (
     <div style={{ height: "800px" }}>
