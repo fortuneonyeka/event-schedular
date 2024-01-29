@@ -49,7 +49,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="app">
-      <div className="content">
+      <div className="conten">
         
         <div className="calendar-container">
         <RouterProvider router={router}/>

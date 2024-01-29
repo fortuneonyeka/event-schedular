@@ -18,15 +18,15 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div >
+    <div className="dashboard-container">
       <div>
         <h1 className="dashboard-header">Welcome to the Dashboard</h1>
       </div>
       <div className="stats">
         {statsData.map((stat, index) => (
           <div key={index} className="stat-card">
-            <h2>{stat.title}</h2>
-            <p>{stat.value}</p>
+            <h2 className="stat-title">{stat.title}</h2>
+            <p className="stat-value">{stat.value}</p>
           </div>
         ))}
       </div>
