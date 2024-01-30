@@ -21,16 +21,11 @@ const BasicCalendar = () => {
     []
   );
 
-  
-
   useEffect(() => {
     if (storedEvents.length > 0) {
       setEvents(storedEvents);
     }
   }, [storedEvents]);
-
-  
-  
 
   const handleSelectSlot = (slotInfo) => {
     if (moment(slotInfo.start).isSameOrAfter(today, "day")) {
@@ -106,7 +101,6 @@ const BasicCalendar = () => {
     }
   };
 
-  // Add line-through style to passed events
   const eventStyleGetter = (event, start, end, isSelected) => {
     const eventStart = moment(event.start).startOf("day");
 
@@ -121,13 +115,12 @@ const BasicCalendar = () => {
     return {};
   };
 
-
   return (
     <div style={{ height: "800px" }}>
       <Calendar
         localizer={localizer}
         events={events}
-        views={["month",  "agenda"]}
+        views={["month", "agenda"]}
         startAccessor="start"
         endAccessor="end"
         style={{ margin: "50px" }}
@@ -135,11 +128,8 @@ const BasicCalendar = () => {
         selectable={true}
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectedEvent}
-        // eventPropGetter={eventStyleGetter}
         min={today.toDate()}
       />
-
-      {/* <Entes storedEvents={storedEvents}/> */}
 
       {showModal && (
         <Modal
