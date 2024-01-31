@@ -25,6 +25,17 @@ const BasicCalendar = () => {
     if (storedEvents.length > 0) {
       setEvents(storedEvents);
     }
+
+    const filteredEvents = storedEvents.filter((event) => {
+      const eventStart = moment(event.start);
+      const thirtyDaysAgo = moment().subtract(30, "days");
+      return eventStart.isSameOrAfter(thirtyDaysAgo);
+    });
+
+    localStorage.setItem("events", JSON.stringify(filteredEvents));
+
+
+
   }, [storedEvents]);
 
   const handleSelectSlot = (slotInfo) => {
