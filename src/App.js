@@ -7,8 +7,8 @@ import {
   RouterProvider,
   ScrollRestoration,
 } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Events from "./components/Events";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Events from "./pages/events/Events";
 
 const Layout = () => {
   return (
