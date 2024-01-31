@@ -15,16 +15,19 @@ const Events = () => {
     return date.toLocaleDateString('en-US', options);
   };
 
+  const renderEvents = () => {
+    return storedEvents.map((event) => (
+      <div key={event.id} className="event-item">
+        <h3>{event.title}</h3>
+        <p>Start: {formatDate(event.start)}</p>
+        <p>End: {formatDate(event.end)}</p>
+      </div>
+    ));
+  };
+
   return (
     <div className="event-container">
-      
-      {storedEvents.map((event) => (
-        <div key={event.id} className="event-item">
-          <h3>{event.title}</h3>
-          <p>Start: {formatDate(event.start)}</p>
-          <p>End: {formatDate(event.end)}</p>
-        </div>
-      ))}
+      {renderEvents()}
     </div>
   );
 };

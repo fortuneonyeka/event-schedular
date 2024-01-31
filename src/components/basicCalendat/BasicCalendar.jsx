@@ -3,7 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "./basic.css";
 import Modal from "../modal/Modal";
-import Events from "../../pages/events/Events";
+import { DateTime } from "luxon";
 
 const localizer = momentLocalizer(moment);
 
@@ -16,26 +16,17 @@ const BasicCalendar = () => {
 
   const today = moment().startOf("day");
 
-  const storedEvents = useMemo(
-    () => JSON.parse(localStorage.getItem("events")) || [],
-    []
-  );
+  const storedEvents = useMemo(() => {
+    const storedEventsFromLocalStorage =
+      JSON.parse(localStorage.getItem("events")) || [];
+    return storedEventsFromLocalStorage.filter((event) =>
+      moment(event.start).isSameOrAfter(moment().subtract(30, "days"))
+    );
+  }, []);
 
   useEffect(() => {
-    if (storedEvents.length > 0) {
-      setEvents(storedEvents);
-    }
-
-    const filteredEvents = storedEvents.filter((event) => {
-      const eventStart = moment(event.start);
-      const thirtyDaysAgo = moment().subtract(30, "days");
-      return eventStart.isSameOrAfter(thirtyDaysAgo);
-    });
-
-    localStorage.setItem("events", JSON.stringify(filteredEvents));
-
-
-
+    setEvents(storedEvents);
+    localStorage.setItem("events", JSON.stringify(storedEvents));
   }, [storedEvents]);
 
   const handleSelectSlot = (slotInfo) => {
@@ -63,15 +54,13 @@ const BasicCalendar = () => {
           id: events.length + 1,
           title: eventTitle,
           start: selectedDate,
-          end: moment(selectedDate).endOf("day").toDate(),
-          allDay: true,
+          end: moment(selectedDate).endOf("day"),
         };
 
-        storedEvents.push(newEvent);
+        const updatedEvents = [...events, newEvent];
 
-        localStorage.setItem("events", JSON.stringify(storedEvents));
-
-        setEvents((prev) => [...prev, newEvent]);
+        localStorage.setItem("events", JSON.stringify(updatedEvents));
+        setEvents(updatedEvents);
 
         setShowModal(false);
         setEventTitle("");
@@ -112,7 +101,7 @@ const BasicCalendar = () => {
     }
   };
 
-  const eventStyleGetter = (event, start, end, isSelected) => {
+  const styleEvent = (event, start, end, isSelected) => {
     const eventStart = moment(event.start).startOf("day");
 
     if (eventStart.isBefore(today, "day")) {
@@ -127,7 +116,7 @@ const BasicCalendar = () => {
   };
 
   return (
-    <div style={{ height: "800px" }}>
+    <div style={{ height: "800px", marginTop: "100px" }}>
       <Calendar
         localizer={localizer}
         events={events}
@@ -135,7 +124,7 @@ const BasicCalendar = () => {
         startAccessor="start"
         endAccessor="end"
         style={{ margin: "50px" }}
-        eventPropGetter={eventStyleGetter}
+        eventPropGetter={styleEvent}
         selectable={true}
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectedEvent}

@@ -5,47 +5,42 @@ const Dashboard = () => {
   const [storedEvents, setStoredEvents] = useState([]);
   const [numberOfStoredEvents, setNumberOfStoredEvents] = useState(0);
   const [numberOfPassedEvents, setNumberOfPassedEvents] = useState(0);
-  const [numberOfCurrentAndFutureEvents, setNumberOfCurrentAndFutureEvents] = useState(0);
+  const [numberOfCurrentAndFutureEvents, setNumberOfCurrentAndFutureEvents] =
+    useState(0);
+
+  
+
 
   useEffect(() => {
-    const eventsFromLocalStorage =
-      JSON.parse(localStorage.getItem("events")) || [];
+    const eventsFromLocalStorage = JSON.parse(localStorage.getItem("events")) || [];
+    
+    const today = new Date();
+    const todayStart = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate(),
+        0,
+        0,
+        0,
+        0
+    );
+
+    const passedEvents = eventsFromLocalStorage.filter(event => {
+        const eventStart = new Date(event.start);
+        return eventStart < todayStart;
+    });
+
+    const currentAndFutureEvents = eventsFromLocalStorage.filter(event => {
+        const eventStart = new Date(event.start);
+        return eventStart >= todayStart;
+    });
+
     setStoredEvents(eventsFromLocalStorage);
     setNumberOfStoredEvents(eventsFromLocalStorage.length);
-
-    // Filter out passed events excluding today
-    const passedEvents = eventsFromLocalStorage.filter((event) => {
-      const eventStart = new Date(event.start);
-      const today = new Date();
-      const todayStart = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate(),
-        0,
-        0,
-        0,
-        0
-      );
-      return eventStart < todayStart;
-    });
     setNumberOfPassedEvents(passedEvents.length);
-
-    const currentAndFutureEvents = eventsFromLocalStorage.filter((event) => {
-      const eventStart = new Date(event.start);
-      const today = new Date();
-      const todayStart = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate(),
-        0,
-        0,
-        0,
-        0
-      );
-      return eventStart >= todayStart;
-    });
     setNumberOfCurrentAndFutureEvents(currentAndFutureEvents.length);
-  }, []);
+}, []);
+
 
   return (
     <div className="dashboard-container">

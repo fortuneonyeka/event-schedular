@@ -10,16 +10,24 @@ const Modal = ({
   deleteEvents,
   handleEdit,
 }) => {
+  const modalTitle = selectEvent ? "Edit Event" : "Add Event";
+  const addButtonText = selectEvent ? "Add Changes" : "Add Event";
+
+  const handleDeleteEvent = () => {
+    if (selectEvent) {
+      deleteEvents(selectEvent.id);
+    }
+  };
+
   return (
-    <div className="modal-container">
+    <div data-testid="modal" className="modal-container">
       <div className="modal-content">
-        <h2>{selectEvent ? "Edit Event" : "Add Event"}</h2>
+        <h2>{modalTitle}</h2>
         <form>
           <div className="form-group">
             <label htmlFor="eventTitle">Event Title:</label>
             <input
               type="text"
-              id="eventTitle"
               value={eventTitle}
               onChange={setEventTitle}
               required
@@ -29,7 +37,7 @@ const Modal = ({
             {selectEvent && (
               <button
                 type="button"
-                onClick={() => deleteEvents(selectEvent.id)}
+                onClick={handleDeleteEvent}
                 className="delete-btn"
               >
                 Remove Event
@@ -38,9 +46,10 @@ const Modal = ({
             <button
               onClick={selectEvent ? handleEdit : saveEvent}
               type="button"
+              data-testid="btn-add"
               className="submit-btn"
             >
-              {selectEvent ? "Add Changes" : "Add Event"}
+              {addButtonText}
             </button>
             <button onClick={setShowModal} className="cancel-btn">
               Cancel
