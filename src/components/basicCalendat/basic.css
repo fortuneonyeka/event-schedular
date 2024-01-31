@@ -76,7 +76,6 @@
     font-size: 10px;
     display: flex;
     text-align: start !important;
-    align-items: start !important;
     justify-content: center !important;
     background: blueviolet !important;
     width: 100% !important;
@@ -91,10 +90,7 @@
 
 @media screen and (max-width: 768px) {
   .sidenav {
-    width: 200px; /* Adjust width for tablets */
-  }
-
-  .rbc-event {
+    width: 200px;
   }
 }
 
