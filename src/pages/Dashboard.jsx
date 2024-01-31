@@ -5,6 +5,7 @@ const Dashboard = () => {
   const [storedEvents, setStoredEvents] = useState([]);
   const [numberOfStoredEvents, setNumberOfStoredEvents] = useState(0);
   const [numberOfPassedEvents, setNumberOfPassedEvents] = useState(0);
+  const [numberOfCurrentAndFutureEvents, setNumberOfCurrentAndFutureEvents] = useState(0);
 
   useEffect(() => {
     const eventsFromLocalStorage =
@@ -28,6 +29,22 @@ const Dashboard = () => {
       return eventStart < todayStart;
     });
     setNumberOfPassedEvents(passedEvents.length);
+
+    const currentAndFutureEvents = eventsFromLocalStorage.filter((event) => {
+      const eventStart = new Date(event.start);
+      const today = new Date();
+      const todayStart = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate(),
+        0,
+        0,
+        0,
+        0
+      );
+      return eventStart >= todayStart;
+    });
+    setNumberOfCurrentAndFutureEvents(currentAndFutureEvents.length);
   }, []);
 
   return (
@@ -68,7 +85,8 @@ const Dashboard = () => {
       <div className="recent-activity">
         <h2>Recent Activity</h2>
         <h2>You scheduled: {numberOfStoredEvents} events</h2>
-        <p>Number of passed events: {numberOfPassedEvents}</p>
+        <p>Passed events: {numberOfPassedEvents}</p>
+        <p>Active events: {numberOfCurrentAndFutureEvents}</p>
       </div>
     </div>
   );
