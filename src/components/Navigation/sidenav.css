@@ -1,80 +1,122 @@
-.sidenav {
-  width: 200px;
+/* Navbar styles */
+.navbar {
   background-color: #333;
   color: #fff;
+  width: 250px; /* Adjust width for tablet and desktop */
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
-  z-index: 2;
-  position: fixed; /* Make sidebar fixed */
-  left: 0; /* Align sidebar to the left */
-  top: 0; /* Align sidebar to the top */
-  height: 100vh; /* Make sidebar full height */
-  overflow-y: auto; /* Add scrollbar if content exceeds sidebar height */
-  
+  border-bottom: 1px solid #555;
 }
 
-.sidenav h2 {
-  color: #fff;
+.app-header {
+  text-decoration: none;
+  list-style: none;
+  color: white;
 }
 
-.sidenav ul {
-  list-style-type: none;
+.nav-items {
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.sidenav li {
-  margin-bottom: 10px;
+.nav-items li {
+  padding: 15px;
+  border-bottom: 1px solid #555;
 }
 
-.sidenav a {
+.nav-items li a {
+  text-decoration: none;
+  color: white; /* Default color for nav items */
+  transition: color 0.3s; /* Smooth transition effect */
+}
+
+.nav-items li a:hover {
+  color: gray; /* Change color to red on hover */
+}
+
+.nav-items li.active {
+  border-left: 5px solid #ffcc00; /* Yellow border-left for active item */
+}
+
+.nav-items li:last-child {
+  border-bottom: none;
+}
+
+.nav-items a {
   color: #fff;
   text-decoration: none;
 }
 
-.sidenav a:hover {
-  color: #ff0; /* Change color on hover as needed */
+/* Hamburger styles */
+.hamburger {
+  display: none; /* Hide hamburger icon by default */
+  cursor: pointer;
 }
 
+.line {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
 
+/* Tablet and mobile view */
+@media screen and (max-width: 992px) {
+  .navbar {
+    width: 100%; /* Adjust width for tablet */
+    height: 100px;
+  }
 
+  .nav-header h3 {
+    display: none;
+  }
 
-/* Media Queries */
-@media screen and (max-width: 768px) {
-      .sidenav {
-        width: 100%; /* Adjust width for tablets */
-      }
-    }
-    
-    @media screen and (max-width: 576px) {
-      .sidenav {
-        width: 100%; /* Adjust width for mobile devices */
-        height: 5%;
-        padding-right: 100%; /* Adjust padding for mobile devices */
-      }
+  .nav-items {
+    display: none;
+  }
 
-      .content {
-            flex: 1;
-            margin-left: 0;
-            padding-top: 100px;
-      }
-    
-      .sidenav h2 {
-        font-size: 16px; /* Adjust font size for mobile devices */
-      }
-    
-      .sidenav li {
-        margin-bottom: 8px; /* Adjust margin for list items on mobile */
-      }
+  .hamburger {
+    display: block;
+  }
 
-      .nevItems {
-            display: flex;
-            flex-direction: row;
-            gap: 40px;
-            justify-content: space-between;
-            
-      }
+  .open .line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
 
-      .rbc-allday-cell {
-            display: none !important;
-      }
+  .open .line:nth-child(2) {
+    opacity: 0;
+  }
 
+  .open .line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .open .nav-items {
+    display: flex;
+    /* flex-direction: ; */
+    gap: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .nav-items li {
+    padding: 1px;
+    /* border-bottom: 1px solid #555; */
+  }
+
+  /* Add yellow line to active nav item */
 }
