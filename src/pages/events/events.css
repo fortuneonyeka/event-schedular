@@ -5,7 +5,6 @@
       
       display: grid;
       grid-template-columns: repeat(2, 1fr); 
-      /* grid-column: span; */
       gap: 20px; 
     }
     
@@ -15,10 +14,9 @@
       background-color: #f9f9f9;
     }
     
-    /* Media queries */
     @media screen and (max-width: 576px) {
       .event-item {
-        padding: 12px; /* Adjust padding for mobile screens */
+        padding: 12px;
       }
     }
     
@@ -27,7 +25,7 @@
       
 
       .event-item {
-        padding: 15px; /* Adjust padding for tablet screens */
+        padding: 15px;
       }
     }
     

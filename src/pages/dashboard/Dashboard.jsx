@@ -79,9 +79,15 @@ const Dashboard = () => {
 
       <div className="recent-activity">
         <h2>Recent Activity</h2>
-        <h2>You scheduled: {numberOfStoredEvents} events</h2>
-        <p>Passed events: {numberOfPassedEvents}</p>
-        <p>Active events: {numberOfCurrentAndFutureEvents}</p>
+        <p>All Events: {numberOfStoredEvents}</p>
+        <div className="recent-activities">
+        <p style={{
+          textDecoration: "line-through",
+        }}>Passed events: {numberOfPassedEvents}</p>
+        <p style={{
+          color: "green",
+        }}>Active events: {numberOfCurrentAndFutureEvents}</p>
+        </div>
       </div>
     </div>
   );

@@ -13,46 +13,40 @@ import Events from "./pages/events/Events";
 const Layout = () => {
   return (
     <div>
-     <SideNav />
+      <SideNav />
       <ScrollRestoration />
       <Outlet />
-      
     </div>
   );
 };
 
 const router = createBrowserRouter([
   {
-    path:"/",
-    element:<Layout />,
-    children:[
+    path: "/",
+    element: <Layout />,
+    children: [
       {
-        path:"/",
+        path: "/",
         element: <Dashboard />,
-        // loader: productData,
       },
       {
-        path:"/calendar",
-        element: <BasicCalendar />
+        path: "/calendar",
+        element: <BasicCalendar />,
       },
       {
-        path:"/events",
-        element: <Events />
+        path: "/events",
+        element: <Events />,
       },
-     
-      
-    ]
-  }
-])
-
+    ],
+  },
+]);
 
 function App() {
   return (
     <div className="app">
       <div className="conten">
-        
         <div className="calendar-container">
-        <RouterProvider router={router}/>
+          <RouterProvider router={router} />
         </div>
       </div>
     </div>
