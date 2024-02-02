@@ -38,7 +38,7 @@ Deleting Events: Events can be deleted by clicking on the delete button within t
 
 ## Live Demo (if available)
 
-[Live Demo Link](https://home-finder-react.vercel.app/) 
+[Live Demo Link](https://event-schedular-nu.vercel.app/) 
 
 
 ## Getting Started
@@ -56,12 +56,18 @@ git@github.com:fortuneonyeka/event-schedular.git
 cd event-schedular
 npm install
 npm start / yarn start
-npm run test
+
 ```
 
-1.  You can start schedulling events by going to the calendar page and clicking on the date of your choice.
 
-2.  All the changes will be automatically updated on your local server on http://localhost:3000/. You can stop your local server at any time hitting `<Ctrl> + C` on your keyboard.
+3.  You can start schedulling events by going to the calendar page and clicking on the date of your choice.
+
+4.  All the changes will be automatically updated on your local server on http://localhost:3000/. You can stop your local server at any time hitting `<Ctrl> + C` on your keyboard.
+
+5. To run test:
+```sh
+npm run test
+```
 
 ## Author
 
