@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Events from "./pages/events/Events";
+import NotFound from "./components/NotFound";
 
 const Layout = () => {
   return (
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/events",
         element: <Events />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
